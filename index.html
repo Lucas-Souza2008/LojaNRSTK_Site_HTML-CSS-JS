@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NORESTOCK</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#fff;
+color:#111;
+}
+
+/* HEADER */
+
+header{
+position:fixed;
+top:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+border-bottom:1px solid #eee;
+z-index:1000;
+}
+
+.logo{
+font-size:24px;
+font-weight:900;
+letter-spacing:3px;
+}
+
+nav a{
+margin-left:25px;
+text-decoration:none;
+color:#111;
+font-size:14px;
+transition:0.3s;
+}
+
+nav a:hover{
+opacity:0.6;
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+background:url("https://images.unsplash.com/photo-1520975922284-3c1c1a54a0c5") center/cover;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:0 20px;
+}
+
+.hero h1{
+font-size:64px;
+color:white;
+margin-bottom:20px;
+letter-spacing:3px;
+}
+
+.hero p{
+color:white;
+font-size:18px;
+margin-bottom:30px;
+}
+
+.btn{
+background:black;
+color:white;
+padding:16px 40px;
+border-radius:40px;
+text-decoration:none;
+font-size:14px;
+}
+
+/* COUNTDOWN */
+
+.countdown{
+margin-top:20px;
+color:white;
+font-size:14px;
+}
+
+/* PRODUCTS */
+
+.products{
+padding:120px 8%;
+}
+
+.products h2{
+font-size:30px;
+margin-bottom:50px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:40px;
+}
+
+.card{
+border-radius:12px;
+overflow:hidden;
+border:1px solid #eee;
+background:white;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 15px 30px rgba(0,0,0,0.1);
+}
+
+.card img{
+width:100%;
+height:300px;
+object-fit:cover;
+}
+
+.card-info{
+padding:20px;
+text-align:center;
+}
+
+.price{
+font-weight:bold;
+margin:5px 0;
+}
+
+.label{
+font-size:12px;
+color:#e63946;
+margin-bottom:10px;
+}
+
+.whatsapp{
+display:inline-block;
+padding:12px 20px;
+background:#25D366;
+color:white;
+text-decoration:none;
+border-radius:25px;
+}
+
+/* ABOUT */
+
+.about{
+padding:100px 8%;
+background:#f5f5f5;
+text-align:center;
+}
+
+.about h2{
+margin-bottom:20px;
+}
+
+.about p{
+max-width:600px;
+margin:auto;
+line-height:1.6;
+}
+
+/* FOOTER */
+
+footer{
+padding:40px;
+text-align:center;
+border-top:1px solid #eee;
+font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:40px;
+}
+
+nav{
+display:none;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">NORESTOCK</div>
+
+<nav>
+
+<a href="#">DROP</a>
+<a href="#">SHOES</a>
+<a href="#">VINTAGE</a>
+<a href="#">ACCESSORIES</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>Once Found. Never Again.</h1>
+
+<p>Unique vintage pieces sourced from thrift stores.</p>
+
+<a class="btn" href="#drop">VIEW DROP</a>
+
+<div class="countdown">
+NEXT DROP IN <span id="timer"></span>
+</div>
+
+</section>
+
+<section class="products" id="drop">
+
+<h2>LATEST DROP</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1520975922284-3c1c1a54a0c5">
+
+<div class="card-info">
+
+<h3>Adidas Vintage Jacket</h3>
+
+<p>Size M</p>
+
+<p class="price">R$100</p>
+
+<div class="label">ONE OF ONE</div>
+
+<a class="whatsapp"
+href="https://wa.me/5599999999999?text=Hello%20I'm%20interested%20in%20the%20Adidas%20Vintage%20Jacket">
+
+Buy on WhatsApp
+
+</a>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1514996937319-344454492b37">
+
+<div class="card-info">
+
+<h3>Nike Vintage Hoodie</h3>
+
+<p>Size G</p>
+
+<p class="price">R$120</p>
+
+<div class="label">ONE OF ONE</div>
+
+<a class="whatsapp"
+href="https://wa.me/5599999999999?text=Hello%20I'm%20interested%20in%20the%20Nike%20Vintage%20Hoodie">
+
+Buy on WhatsApp
+
+</a>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1520975922284-3c1c1a54a0c5">
+
+<div class="card-info">
+
+<h3>Vintage Cargo Pants</h3>
+
+<p>Size 40</p>
+
+<p class="price">R$150</p>
+
+<div class="label">ONE OF ONE</div>
+
+<a class="whatsapp"
+href="https://wa.me/5599999999999?text=Hello%20I'm%20interested%20in%20the%20Vintage%20Cargo%20Pants">
+
+Buy on WhatsApp
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="about">
+
+<h2>About NORESTOCK</h2>
+
+<p>
+
+NORESTOCK curates rare vintage pieces found in thrift stores and forgotten archives.
+Every item is one of one. Once it's gone, it never returns.
+
+</p>
+
+</section>
+
+<footer>
+
+<p>© 2026 NORESTOCK — Once Found. Never Again.</p>
+
+</footer>
+
+<script>
+
+var countDownDate = new Date("Dec 30, 2026 19:00:00").getTime();
+
+var x = setInterval(function() {
+
+var now = new Date().getTime();
+var distance = countDownDate - now;
+
+var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+document.getElementById("timer").innerHTML = days + "d " + hours + "h ";
+
+}, 1000);
+
+</script>
+
+</body>
+</html>
