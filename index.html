@@ -17,6 +17,10 @@
 
 <body>
 
+    <header class="header">
+        <img src="Logo.png" alt="NORESTOCK" class="logo">
+    </header>
+
     <!-- INÍCIO -->
     <section id="inicio">
         <img src="Logo.png" alt="NORESTOCK" class="logo">
@@ -25,51 +29,64 @@
     <!-- PRODUTOS -->
     <section id="produtos">
 
+        <p class="drop">DROP 001</p>
+
         <div class="cards">
 
             <!-- CARD 1 -->
-            <div class="card">
+            <div class="card"
+                data-images="CalcaVerdeClaro3.png,CalcaVerdeClaro4.png,CalcaVerdeClaro5.png,CalcaVerdeClaro6.png">
+
                 <div class="card-img">
-                    <img src="item01.png" alt="">
+                    <img src="CalcaVerdeClaro1.png" class="img1" alt="">
+                    <img src="CalcaVerdeClaro2.png" class="img2" alt="">
                 </div>
 
                 <div class="card-info">
-                    <h3>CAMISETA NORESTOCK</h3>
-                    <p class="preco">R$ 199,00</p>
+                    <h3>CALÇA VERDE CLARO - 46</h3>
+                    <p class="preco">R$ 179,00</p>
 
-                    <a href="https://wa.me/5541995942429?text=Olá!%20Quero%20a%20camiseta%20NORESTOCK" class="btn">
+                    <a href="https://wa.me/5541995942429?text=Olá!%20Quero%20a%20CALÇA%20VERDE%20CLARO" class="btn"
+                        target="_blank">
                         Comprar
                     </a>
                 </div>
             </div>
 
             <!-- CARD 2 -->
-            <div class="card">
+            <div class="card"
+                data-images="CalcaVerdeEscura3.png,CalcaVerdeEscura4.png,CalcaVerdeEscura5.png,CalcaVerdeEscura6.png">
+
                 <div class="card-img">
-                    <img src="item01.png" alt="">
+                    <img src="CalcaVerdeEscura1.png" class="img1" alt="">
+                    <img src="CalcaVerdeEscura2.png" class="img2" alt="">
                 </div>
 
                 <div class="card-info">
-                    <h3>CAMISETA NORESTOCK</h3>
+                    <h3>CALÇA CARGO VERDE MUSCO - 46</h3>
                     <p class="preco">R$ 199,00</p>
 
-                    <a href="https://wa.me/5541995942429?text=Olá!%20Quero%20a%20camiseta%20NORESTOCK" class="btn">
+                    <a href="https://wa.me/5541995942429?text=Olá!%20Quero%20a%20CALÇA%20VERDE%20MUSGO" class="btn"
+                        target="_blank">
                         Comprar
                     </a>
                 </div>
             </div>
 
             <!-- CARD 3 -->
-            <div class="card">
+            <div class="card" data-images="CalcaAzul3.png,CalcaAzul4.png,CalcaAzul5.png">
+
                 <div class="card-img">
-                    <img src="item01.png" alt="">
+                    <img src="CalcaAzul1.png" class="img1" alt="">
+                    <img src="CalcaAzul2.png" class="img2" alt="">
                 </div>
 
                 <div class="card-info">
-                    <h3>CAMISETA NORESTOCK</h3>
-                    <p class="preco">R$ 199,00</p>
+                    <h3>CALÇA VOLCOM - 44</h3>
+                    <p class="preco">R$ 129,00</p>
 
-                    <a href="https://wa.me/5541995942429?text=Olá!%20Quero%20a%20camiseta%20NORESTOCK" class="btn">
+                    <a href="https://wa.me/5541995942429?text=Olá!%20Quero%20a%20CALÇA%20VERDE%20CLARO" class="btn"
+                        target="_blank">
                         Comprar
                     </a>
                 </div>
@@ -77,35 +94,29 @@
 
         </div>
 
+        <!-- MODAL -->
+        <div class="modal" id="modal">
+            <span class="fechar">&times;</span>
+
+            <div class="modal-content" id="modalContent">
+                <!-- preenchido via JS -->
+            </div>
+        </div>
+
     </section>
 
     <!-- FOOTER -->
     <footer class="footer">
-
         <p>© 2026 NORESTOCK</p>
-
         <p id="titulo" class="frase"></p>
 
         <div class="icons">
-            <a class="whats" href="https://wa.me/5541995942429">
-                <i class="fa-brands fa-whatsapp"></i>
-            </a>
-
-            <a class="insta" href="https://instagram.com/thisisnorestock">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
+            <a class="whats" href="#"><i class="fa-brands fa-whatsapp"></i></a>
+            <a class="insta" href="#"><i class="fa-brands fa-instagram"></i></a>
         </div>
-
     </footer>
 
-    <!-- SCRIPTS -->
     <script src="javaScript.js"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            lucide.createIcons();
-        });
-    </script>
 </body>
 
 </html>
