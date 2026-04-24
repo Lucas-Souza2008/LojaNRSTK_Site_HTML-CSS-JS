@@ -10,7 +10,7 @@ body {
 
 /* INÍCIO */
 #inicio {
-    height: 50vh;
+    height: 40vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -96,6 +96,7 @@ body {
     background: transparent;
     overflow: hidden;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .img1,
@@ -150,11 +151,15 @@ body {
 /* BOTÃO */
 .btn {
     display: inline-block;
+    width: auto;
+    max-width: fit-content;
     padding: 10px 20px;
     background: #f5f5f5;
     color: #000000;
     text-decoration: none;
     transition: 0.3s;
+    -webkit-tap-highlight-color: transparent;
+    /* remove flash azul do celular */
 }
 
 .btn:hover {
@@ -165,8 +170,20 @@ body {
 }
 
 .btn:active {
-    transform: scale(0.95);
+    background: #333;
+    color: #fff;
+    border-radius: 5px;
+    transition: 0.9s;
 }
+
+.btn:hover,
+.btn:active {
+    background: #333;
+    color: #fff;
+    border-radius: 5px;
+    transition: 0.9s;
+}
+
 
 .modal {
     display: none;
@@ -180,6 +197,10 @@ body {
 
     justify-content: center;
     align-items: center;
+}
+
+.modal.ativo {
+    display: flex;
 }
 
 .modal-content {
@@ -299,27 +320,24 @@ body {
 /* ===================== */
 @media (max-width: 768px) {
 
-    /* HEADER FIXO */
     .header {
         position: sticky;
         top: 0;
         z-index: 1000;
-
         background: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(8px);
-
+        -webkit-backdrop-filter: blur(8px);
         display: flex;
         justify-content: center;
         align-items: center;
-
         height: 70px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .header .logo {
         width: 90px;
     }
 
-    /* remove seção inicial no mobile */
     #inicio {
         display: none;
     }
@@ -329,30 +347,25 @@ body {
     }
 
     .drop {
-        margin-top: 10px;
-        margin-bottom: 25px;
         margin-top: 100px;
+        margin-bottom: 25px;
     }
 
-    /* GRID */
     .cards {
         grid-template-columns: 1fr;
         gap: 50px;
         padding: 0 15px;
     }
 
-    /* CARD */
     .card {
         transform: none !important;
         max-width: 350px;
         margin: 0 auto;
     }
 
-    /* IMAGEM */
     .card-img {
         width: 100%;
         aspect-ratio: 1 / 1;
-        background: transparent;
         border-radius: 10px;
         overflow: hidden;
     }
@@ -362,25 +375,15 @@ body {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center;
         border-radius: 10px;
         transition: opacity 0.4s ease;
     }
 
-    /* remove hover mobile */
-    .card:hover .img2 {
-        opacity: 0 !important;
-    }
-
-    .card:hover .img1 {
-        opacity: 1 !important;
-    }
-
+    /* 🔥 IMPORTANTE */
     .img2 {
-        display: none;
+        opacity: 0;
     }
 
-    /* TEXTO */
     .card-info h3 {
         font-size: 11px;
     }
@@ -389,36 +392,37 @@ body {
         font-size: 14px;
     }
 
-    /* BOTÃO */
     .btn {
         padding: 10px 18px;
         font-size: 14px;
+        text-align: center;
+        display: inline-block;
     }
 
     .modal {
         display: none;
         position: fixed;
-        z-index: 9999;
         inset: 0;
-
-        background: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(0px);
-        transition: backdrop-filter 0.3s ease;
+        z-index: 9999;
+        width: 100%;
+        height: 100dvh;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
     }
 
     .modal.ativo {
         display: flex;
         backdrop-filter: blur(8px);
-        /* 🔥 blur real */
+        -webkit-backdrop-filter: blur(8px);
     }
 
-    /* MODAL 2x2 */
     .modal-content {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 12px;
         padding: 20px;
-        overflow: visible;
+        max-height: 90vh;
     }
 
     .modal-img {
@@ -428,4 +432,28 @@ body {
         border-radius: 10px;
     }
 
+    .fechar {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 28px;
+        color: #fff;
+        z-index: 10000;
+    }
+
+    .icons a {
+        padding: 10px;
+        display: inline-flex;
+        text-decoration: none;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .card:hover .img2 {
+        opacity: 0 !important;
+    }
+
+    .card:hover .img1 {
+        opacity: 1 !important;
+    }
 }

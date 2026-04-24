@@ -3,7 +3,6 @@ let i = 0;
 
 function digitar() {
     const el = document.getElementById("titulo");
-
     if (!el) return;
 
     if (i < texto.length) {
@@ -39,43 +38,68 @@ document.addEventListener("DOMContentLoaded", () => {
     mostrarCards();
 
     // =====================
-    // CLICK NA IMAGEM
+    // 🔥 EVITA BUG NO BOTÃO
+    // =====================
+    document.querySelectorAll(".btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+    });
+
+    // =====================
+    // CLICK NAS IMAGENS
     // =====================
     document.querySelectorAll(".card-img").forEach(cardImg => {
         cardImg.addEventListener("click", (e) => {
 
+            // se clicou no botão → ignora
+            if (e.target.closest(".btn")) return;
+
             const card = cardImg.closest(".card");
+            const img1 = cardImg.querySelector(".img1");
+            const img2 = cardImg.querySelector(".img2");
 
-            // 🔥 MOBILE: troca imagem no clique
+            // =====================
+            // 📱 MOBILE
+            // =====================
             if (window.innerWidth <= 768) {
-                const img1 = cardImg.querySelector(".img1");
-                const img2 = cardImg.querySelector(".img2");
 
-                if (img2.style.opacity === "1") {
-                    img2.style.opacity = "0";
-                    img1.style.opacity = "1";
-                } else {
-                    img2.style.opacity = "1";
-                    img1.style.opacity = "0";
+                const isBackVisible = img2.style.opacity === "1";
+
+                // 🔥 PRIMEIRO TOQUE → vira imagem
+                if (!card.classList.contains("virado")) {
+                    if (img1 && img2) {
+                        img2.style.opacity = "1";
+                        img1.style.opacity = "0";
+                    }
+
+                    card.classList.add("virado");
+                    return; // NÃO abre modal ainda
                 }
             }
 
             // =====================
-            // MODAL DINÂMICO
+            // 💻 DESKTOP ou 2º CLIQUE MOBILE
             // =====================
             modalContent.innerHTML = "";
 
-            const images = card.getAttribute("data-images").split(",");
+            const images = card.getAttribute("data-images");
 
-            images.forEach(src => {
-                const img = document.createElement("img");
-                img.src = src.trim();
-                img.classList.add("modal-img");
-                modalContent.appendChild(img);
-            });
+            if (images) {
+                images.split(",").forEach(src => {
+                    const img = document.createElement("img");
+                    img.src = src.trim();
+                    img.classList.add("modal-img");
+                    modalContent.appendChild(img);
+                });
+            }
 
-            // abre modal + blur
-            modal.style.display = "flex";
+            modal.classList.add("ativo");
+
+            // reset scroll modal
+            modalContent.scrollTop = 0;
+
+            // trava scroll do fundo
             document.body.classList.add("modal-open");
 
             e.stopPropagation();
@@ -83,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // =====================
-    // RESETAR IMAGENS
+    // RESETAR CARDS
     // =====================
     function resetarCards() {
         cards.forEach(card => {
@@ -94,6 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 img1.style.opacity = "1";
                 img2.style.opacity = "0";
             }
+
+            card.classList.remove("virado"); // 🔥 importante
         });
     }
 
@@ -101,12 +127,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // FECHAR MODAL
     // =====================
     function fecharModal() {
-        modal.style.display = "none";
+        modal.classList.remove("ativo");
+
+        // libera scroll
         document.body.classList.remove("modal-open");
+
         resetarCards();
     }
 
-    fechar.addEventListener("click", fecharModal);
+    if (fechar) {
+        fechar.addEventListener("click", fecharModal);
+    }
 
     window.addEventListener("click", (e) => {
         if (e.target === modal) {
