@@ -40,9 +40,45 @@ document.addEventListener("DOMContentLoaded", () => {
     // =====================
     // 🔥 EVITA BUG NO BOTÃO
     // =====================
-    document.querySelectorAll(".btn").forEach(btn => {
+    document.querySelectorAll(".btn-vendido").forEach(btn => {
         btn.addEventListener("click", (e) => {
+            e.preventDefault();
             e.stopPropagation();
+
+            const antigo = document.querySelector(".popup-found");
+            if (antigo) antigo.remove();
+
+            const popup = document.createElement("div");
+
+            popup.className = "popup-found";
+
+            popup.innerHTML = `
+            <span>FOUND</span>
+            <p>Essa peça já foi encontrada</p>
+        `;
+
+            document.body.appendChild(popup);
+
+            // força o navegador a renderizar
+            popup.offsetHeight;
+
+            // ativa animação
+            popup.classList.add("show");
+
+            // espera aparecer
+            setTimeout(() => {
+
+                popup.classList.remove("show");
+
+                // força render novamente
+                popup.offsetHeight;
+
+                // remove só depois da transição
+                setTimeout(() => {
+                    popup.remove();
+                }, 700);
+
+            }, 2500);
         });
     });
 
