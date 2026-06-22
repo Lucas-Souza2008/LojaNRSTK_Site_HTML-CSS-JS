@@ -1,5 +1,6 @@
-body {
+html, body {
     font-family: 'Poppins', sans-serif;
+    overflow-x: hidden; /* Corta qualquer vazamento horizontal indesejado */
 }
 
 .header {
@@ -271,18 +272,23 @@ body {
     -webkit-overflow-scrolling: touch; /* Esconde a barra de rolagem no Chrome, Safari e Opera */
     scrollbar-width: none; /* Esconde a barra de rolagem no Firefox */
     -webkit-overflow-scrolling: touch; /* Melhora o scroll no mobile */
+    scrollbar-width: none; /* Esconde no Firefox (Desktop/Mobile) */
+    -ms-overflow-style: none; /* Esconde no IE/Edge antigo */
+    -webkit-overflow-scrolling: touch;
 }
 
-.carousel-container::-webkit-scrollbar {
-    display: none; /* Esconde a barra no Chrome/Safari */
-    width: 0;
-    height: 0;
+.carousel-container::-webkit-scrollbar,
+.carousel-container *::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 .carousel-track {
     display: flex;
     gap: 30px; /* Espaço entre os celulares */
     padding: 10px;
+    scrollbar-width: none;
 }
 
 .carousel-item {
