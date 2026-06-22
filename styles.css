@@ -244,6 +244,68 @@ body {
     margin: 10px 0;
 }
 
+.essence {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: -5px;
+}
+
+#essence-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 120px;
+    padding-bottom: 50px;
+}
+
+.carousel-container {
+    width: 100%;
+    max-width: 1400px; /* Ajuste conforme a largura máxima do seu site */
+    margin-top: 120px;
+    padding: 0 20px;
+    overflow-x: auto; /* Permite o scroll horizontal */
+    scroll-behavior: smooth; /* Deixa o deslize suave */
+    -webkit-overflow-scrolling: touch; /* Esconde a barra de rolagem no Chrome, Safari e Opera */
+    scrollbar-width: none; /* Esconde a barra de rolagem no Firefox */
+    -webkit-overflow-scrolling: touch; /* Melhora o scroll no mobile */
+}
+
+.carousel-container::-webkit-scrollbar {
+    display: none; /* Esconde a barra no Chrome/Safari */
+    width: 0;
+    height: 0;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 30px; /* Espaço entre os celulares */
+    padding: 10px;
+}
+
+.carousel-item {
+    flex: 0 0 auto; /* Impede que os itens esmaguem, mantendo o tamanho original */
+    width: 280px;  /* Largura ideal para simular o tamanho de um celular na tela */
+    transition: transform 0.3s ease;
+}
+
+/* Efeito opcional: aumenta levemente o celular ao passar o mouse */
+.carousel-item:hover {
+    transform: scale(1.03);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.logo02 {
+    width: clamp(170px, 15vw, 210px);
+}
+
 .cursor {
     animation: blink 1s infinite;
 }
@@ -457,6 +519,14 @@ body {
         padding: 10px;
         display: inline-flex;
         text-decoration: none;
+    }
+
+    .carousel-item {
+        width: 240px; /* Celulares um pouco menores no mobile */
+    }
+
+    .carousel-track {
+        gap: 15px;
     }
 }
 
