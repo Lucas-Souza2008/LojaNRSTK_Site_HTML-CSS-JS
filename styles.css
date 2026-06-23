@@ -309,8 +309,12 @@ html, body {
 }
 
 .logo02 {
-    width: clamp(110px, 15vw, 210px);
-    padding: 10px;
+    width: clamp(220px, 20vw, 210px);
+    padding: 20px;
+}
+
+.logo03 {
+    width: clamp(150px, 15vw, 210px);
 }
 
 .cursor {
