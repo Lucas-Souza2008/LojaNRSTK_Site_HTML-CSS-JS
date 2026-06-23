@@ -226,7 +226,7 @@ html, body {
 }
 
 .footer {
-    margin-top: 100px;
+    margin-top: 0px;
     background: #fff;
     text-align: center;
     padding: 40px 20px;
@@ -266,7 +266,7 @@ html, body {
     width: 100%;
     max-width: 1400px; /* Ajuste conforme a largura máxima do seu site */
     margin-top: 120px;
-    padding: 0 20px;
+    padding: 0 -100px;
     overflow-x: auto; /* Permite o scroll horizontal */
     scroll-behavior: smooth; /* Deixa o deslize suave */
     -webkit-overflow-scrolling: touch; /* Esconde a barra de rolagem no Chrome, Safari e Opera */
@@ -286,7 +286,7 @@ html, body {
 
 .carousel-track {
     display: flex;
-    gap: 30px; /* Espaço entre os celulares */
+    gap: 50px; /* Espaço entre os celulares */
     padding: 10px;
     scrollbar-width: none;
 }
@@ -309,7 +309,8 @@ html, body {
 }
 
 .logo02 {
-    width: clamp(170px, 15vw, 210px);
+    width: clamp(110px, 15vw, 210px);
+    padding: 10px;
 }
 
 .cursor {
@@ -332,8 +333,8 @@ html, body {
     opacity: 0;
     min-width: 250px;
     transition:
-        opacity .7s cubic-bezier(0.22, 1, 0.36, 1),
-        transform .7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity .7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform .7s cubic-bezier(0.22, 1, 0.36, 1);
     min-width: 250px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
 }
