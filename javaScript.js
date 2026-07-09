@@ -1,45 +1,12 @@
-const texto = "No restock. Once found never again.";
-let i = 0;
-
-function digitar() {
-    const el = document.getElementById("titulo");
-    if (!el) return;
-
-    if (i < texto.length) {
-        el.innerHTML = texto.substring(0, i + 1) + "<span class='cursor'>|</span>";
-        i++;
-        setTimeout(digitar, 120);
-    }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-
     const cards = document.querySelectorAll(".card");
     const modal = document.getElementById("modal");
     const modalContent = document.getElementById("modalContent");
     const fechar = document.querySelector(".fechar");
 
-    // =====================
-    // ANIMAÇÃO AO SCROLL
-    // =====================
-    function mostrarCards() {
-        cards.forEach((card, index) => {
-            const rect = card.getBoundingClientRect();
-
-            if (rect.top < window.innerHeight - 100 && !card.classList.contains("show")) {
-                setTimeout(() => {
-                    card.classList.add("show");
-                }, index * 100);
-            }
-        });
-    }
-
-    window.addEventListener("scroll", mostrarCards);
-    mostrarCards();
-
-    // =====================
-    // 🔥 EVITA BUG NO BOTÃO
-    // =====================
+    // ==========================================
+    // TRATAMENTO PRODUTOS ESGOTADOS (POPUP BANDA INFERIOR)
+    // ==========================================
     document.querySelectorAll(".btn-vendido").forEach(btn => {
         btn.addEventListener("click", (e) => {
             e.preventDefault();
@@ -49,76 +16,55 @@ document.addEventListener("DOMContentLoaded", () => {
             if (antigo) antigo.remove();
 
             const popup = document.createElement("div");
-
             popup.className = "popup-found";
-
             popup.innerHTML = `
-            <span>FOUND</span>
-            <p>Essa peça já foi encontrada</p>
-        `;
+                <span>PIECE SOLD OUT</span>
+                <p>Essa peça exclusiva já foi encontrada por outro membro.</p>
+            `;
 
             document.body.appendChild(popup);
-
-            // força o navegador a renderizar
-            popup.offsetHeight;
-
-            // ativa animação
+            popup.offsetHeight; // Força reflow
             popup.classList.add("show");
 
-            // espera aparecer
             setTimeout(() => {
-
                 popup.classList.remove("show");
-
-                // força render novamente
-                popup.offsetHeight;
-
-                // remove só depois da transição
-                setTimeout(() => {
-                    popup.remove();
-                }, 700);
-
-            }, 2500);
+                setTimeout(() => popup.remove(), 400);
+            }, 3000);
         });
     });
 
-    // =====================
-    // CLICK NAS IMAGENS
-    // =====================
+    // ==========================================
+    // DETECÇÃO DE TOQUE / MODAL (OTIMIZADO INSTAGRAM)
+    // ==========================================
     document.querySelectorAll(".card-img").forEach(cardImg => {
         cardImg.addEventListener("click", (e) => {
-
-            // se clicou no botão → ignora
-            if (e.target.closest(".btn")) return;
-
             const card = cardImg.closest(".card");
             const img1 = cardImg.querySelector(".img1");
             const img2 = cardImg.querySelector(".img2");
 
-            // =====================
-            // 📱 MOBILE
-            // =====================
+            // No Mobile, o primeiro toque alterna a foto, o segundo abre a galeria
             if (window.innerWidth <= 768) {
-
-                const isBackVisible = img2.style.opacity === "1";
-
-                // 🔥 PRIMEIRO TOQUE → vira imagem
                 if (!card.classList.contains("virado")) {
                     if (img1 && img2) {
                         img2.style.opacity = "1";
                         img1.style.opacity = "0";
                     }
-
+                    // Reseta os outros cards ativos para evitar bagunça visual
+                    cards.forEach(c => {
+                        if(c !== card) {
+                            const i1 = c.querySelector(".img1");
+                            const i2 = c.querySelector(".img2");
+                            if(i1 && i2) { i1.style.opacity = "1"; i2.style.opacity = "0"; }
+                            c.classList.remove("virado");
+                        }
+                    });
                     card.classList.add("virado");
-                    return; // NÃO abre modal ainda
+                    return;
                 }
             }
 
-            // =====================
-            // 💻 DESKTOP ou 2º CLIQUE MOBILE
-            // =====================
+            // Abertura do Modal Galeria
             modalContent.innerHTML = "";
-
             const images = card.getAttribute("data-images");
 
             if (images) {
@@ -131,59 +77,28 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             modal.classList.add("ativo");
-
-            // reset scroll modal
-            modalContent.scrollTop = 0;
-
-            // trava scroll do fundo
-            document.body.classList.add("modal-open");
-
+            document.body.style.overflow = "hidden"; // Bloqueia scroll do fundo
             e.stopPropagation();
         });
     });
 
-    // =====================
-    // RESETAR CARDS
-    // =====================
-    function resetarCards() {
+    // Fechar Modal
+    function fecharModal() {
+        modal.classList.remove("ativo");
+        document.body.style.overflow = ""; // Libera scroll
+        
+        // Reseta imagens dos produtos
         cards.forEach(card => {
             const img1 = card.querySelector(".img1");
             const img2 = card.querySelector(".img2");
-
             if (img1 && img2) {
                 img1.style.opacity = "1";
                 img2.style.opacity = "0";
             }
-
-            card.classList.remove("virado"); // 🔥 importante
+            card.classList.remove("virado");
         });
     }
 
-    // =====================
-    // FECHAR MODAL
-    // =====================
-    function fecharModal() {
-        modal.classList.remove("ativo");
-
-        // libera scroll
-        document.body.classList.remove("modal-open");
-
-        resetarCards();
-    }
-
-    if (fechar) {
-        fechar.addEventListener("click", fecharModal);
-    }
-
-    window.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            fecharModal();
-        }
-    });
-
+    if (fechar) fechar.addEventListener("click", fecharModal);
+    window.addEventListener("click", (e) => { if (e.target === modal) fecharModal(); });
 });
-
-// =====================
-// TEXTO DIGITANDO
-// =====================
-window.addEventListener("load", digitar);
