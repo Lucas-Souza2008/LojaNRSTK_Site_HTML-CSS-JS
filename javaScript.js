@@ -4,13 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalContent = document.getElementById("modalContent");
     const fechar = document.querySelector(".fechar");
 
-    // ==========================================
-    // TRATAMENTO PRODUTOS ESGOTADOS (POPUP BANDA INFERIOR)
-    // ==========================================
-    document.querySelectorAll(".btn-vendido").forEach(btn => {
-        btn.addEventListener("click", (e) => {
+    // NOTIFICAÇÃO DISCRETA SE CLICAR NO PRODUTO ESGOTADO
+    document.querySelectorAll(".btn-vendido, .card.esgotado").forEach(item => {
+        item.addEventListener("click", (e) => {
+            if (e.target.tagName === 'IMG') return;
+
             e.preventDefault();
-            e.stopPropagation();
 
             const antigo = document.querySelector(".popup-found");
             if (antigo) antigo.remove();
@@ -19,11 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
             popup.className = "popup-found";
             popup.innerHTML = `
                 <span>PIECE SOLD OUT</span>
-                <p>Essa peça exclusiva já foi encontrada por outro membro.</p>
+                <p>Essa peça já foi vendida.</p>
             `;
 
             document.body.appendChild(popup);
-            popup.offsetHeight; // Força reflow
+            popup.offsetHeight; 
             popup.classList.add("show");
 
             setTimeout(() => {
@@ -33,72 +32,44 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // ==========================================
-    // DETECÇÃO DE TOQUE / MODAL (OTIMIZADO INSTAGRAM)
-    // ==========================================
+    // MODAL DE GALERIA DE FOTOS
     document.querySelectorAll(".card-img").forEach(cardImg => {
         cardImg.addEventListener("click", (e) => {
             const card = cardImg.closest(".card");
-            const img1 = cardImg.querySelector(".img1");
-            const img2 = cardImg.querySelector(".img2");
+            
+            if (card.classList.contains("esgotado")) return;
 
-            // No Mobile, o primeiro toque alterna a foto, o segundo abre a galeria
-            if (window.innerWidth <= 768) {
-                if (!card.classList.contains("virado")) {
-                    if (img1 && img2) {
-                        img2.style.opacity = "1";
-                        img1.style.opacity = "0";
-                    }
-                    // Reseta os outros cards ativos para evitar bagunça visual
-                    cards.forEach(c => {
-                        if(c !== card) {
-                            const i1 = c.querySelector(".img1");
-                            const i2 = c.querySelector(".img2");
-                            if(i1 && i2) { i1.style.opacity = "1"; i2.style.opacity = "0"; }
-                            c.classList.remove("virado");
-                        }
-                    });
-                    card.classList.add("virado");
-                    return;
-                }
-            }
-
-            // Abertura do Modal Galeria
-            modalContent.innerHTML = "";
             const images = card.getAttribute("data-images");
+            if (!images) return;
 
-            if (images) {
+            if (modalContent) {
+                modalContent.innerHTML = "";
                 images.split(",").forEach(src => {
                     const img = document.createElement("img");
                     img.src = src.trim();
-                    img.classList.add("modal-img");
+                    img.style.maxWidth = "80vw";
+                    img.style.maxHeight = "80vh";
+                    img.style.objectFit = "contain";
                     modalContent.appendChild(img);
                 });
-            }
 
-            modal.classList.add("ativo");
-            document.body.style.overflow = "hidden"; // Bloqueia scroll do fundo
-            e.stopPropagation();
+                modal.classList.add("ativo");
+                document.body.style.overflow = "hidden";
+            }
         });
     });
 
-    // Fechar Modal
     function fecharModal() {
-        modal.classList.remove("ativo");
-        document.body.style.overflow = ""; // Libera scroll
-        
-        // Reseta imagens dos produtos
-        cards.forEach(card => {
-            const img1 = card.querySelector(".img1");
-            const img2 = card.querySelector(".img2");
-            if (img1 && img2) {
-                img1.style.opacity = "1";
-                img2.style.opacity = "0";
-            }
-            card.classList.remove("virado");
-        });
+        if (modal) {
+            modal.classList.remove("ativo");
+            document.body.style.overflow = "";
+        }
     }
 
     if (fechar) fechar.addEventListener("click", fecharModal);
-    window.addEventListener("click", (e) => { if (e.target === modal) fecharModal(); });
+    if (modal) {
+        window.addEventListener("click", (e) => { 
+            if (e.target === modal) fecharModal(); 
+        });
+    }
 });

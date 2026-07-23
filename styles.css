@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. RESET E DIRETRIZES TÉCNICAS (Luxo Minimalista)
+   1. RESET E DIRETRIZES TÉCNICAS
    ========================================================================== */
 * {
     margin: 0;
@@ -16,7 +16,7 @@ html, body {
 }
 
 /* ==========================================================================
-   2. HEADER ESTRUTURAL (Posicionamento Premium Zara)
+   2. HEADER ESTRUTURAL
    ========================================================================== */
 .zara-header {
     position: fixed;
@@ -24,11 +24,10 @@ html, body {
     left: 0;
     width: 100%;
     height: 90px;
-    padding: 0 40px;
+    padding: 30px 40px 0 40px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding-top: 30px;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -44,7 +43,7 @@ html, body {
 }
 
 /* ==========================================================================
-   3. GRID EDITORIAL DE PRODUTOS & INFORMAÇÕES INTEGRADAS
+   3. GRID EDITORIAL DE PRODUTOS
    ========================================================================== */
 #produtos-container {
     margin-top: 160px;
@@ -59,7 +58,6 @@ html, body {
     margin: 0 auto;
 }
 
-/* Foco elegante ao passar o mouse nas peças */
 @media (hover: hover) {
     .cards:hover .card:not(:hover) {
         opacity: 0.75;
@@ -97,12 +95,23 @@ html, body {
     transform: scale(1.02);
 }
 
-/* Sem alterações de cor ou opacidade nos esgotados para evitar bugs visuais */
-.card.esgotado {
-    opacity: 1; 
+/* --- ESTILO DISCRETO PARA PRODUTOS ESGOTADOS --- */
+.card.esgotado .card-img img {
+    opacity: 0.45; /* Efeito suave no produto esgotado */
 }
 
-/* Alinhamento simétrico do bloco informativo */
+.tag-subtil-esgotado {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    color: #777777;
+    text-transform: uppercase;
+}
+
+/* Informações do Card */
 .card-info {
     padding-top: 12px;
     display: flex;
@@ -138,7 +147,14 @@ html, body {
     color: #000000;
 }
 
-/* BOTÃO DE COMPRA '+' DISCRETO (Alinhado à direita do texto) */
+.preco-esgotado {
+    font-size: 9px;
+    font-weight: 400;
+    color: #aaaaaa;
+    letter-spacing: 0.5px;
+}
+
+/* Botões de Ação */
 .btn-comprar-zara {
     display: flex;
     align-items: center;
@@ -160,16 +176,25 @@ html, body {
     height: 15px;
 }
 
-.tag-esgotado {
-    font-size: 8px;
-    font-weight: 600;
-    color: #ff3b30;
-    letter-spacing: 0.5px;
-    margin-bottom: 2px;
+.btn-vendido {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.dot-esgotado {
+    width: 4px;
+    height: 4px;
+    background-color: #cccccc;
+    border-radius: 50%;
+    display: block;
 }
 
 /* ==========================================================================
-   4. SEÇÃO PROVA SOCIAL (Grid Assíncrono Editorial)
+   4. SEÇÃO COMMUNITY (Lookbook)
    ========================================================================== */
 #essence-section {
     margin-top: 180px;
@@ -200,7 +225,6 @@ html, body {
     text-transform: uppercase;
 }
 
-/* Estrutura de três colunas de lookbook */
 .community-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -215,7 +239,6 @@ html, body {
     gap: 30px;
 }
 
-/* Recuo vertical para quebrar o alinhamento reto (Estética de Revista) */
 .grid-column.central {
     margin-top: 60px;
 }
@@ -227,20 +250,15 @@ html, body {
     position: relative;
 }
 
-.grid-item.tall {
-    aspect-ratio: 2 / 3;
-}
-
-.grid-item.square {
-    aspect-ratio: 1 / 1;
-}
+.grid-item.tall { aspect-ratio: 2 / 3; }
+.grid-item.square { aspect-ratio: 1 / 1; }
 
 .grid-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: grayscale(100%); /* Lookbook cru P&B inicial */
+    filter: grayscale(100%);
     transition: filter 0.5s ease, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -250,32 +268,37 @@ html, body {
 }
 
 /* ==========================================================================
-   5. RODAPÉ INSTITUCIONAL
+   5. RODAPÉ INSTITUCIONAL (LIMPO)
    ========================================================================== */
 .zara-footer {
-    padding: 100px 40px 60px 40px;
+    padding: 80px 40px 60px 40px;
     background-color: #ffffff;
     border-top: 1px solid #f2f2f2;
+}
+
+.footer-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
 }
 
 .footer-links {
     font-size: 9px;
     letter-spacing: 1.5px;
     color: #666666;
-    margin-bottom: 25px;
 }
 
-.footer-links span {
-    cursor: pointer;
+.footer-links a {
+    text-decoration: none;
     color: #000000;
+    transition: opacity 0.2s;
 }
 
-.newsletter-text {
-    font-size: 10px;
-    letter-spacing: 2px;
-    font-weight: 400;
-    margin-bottom: 40px;
-    cursor: pointer;
+.footer-links a:hover {
+    opacity: 0.5;
 }
 
 .copyright {
@@ -285,7 +308,60 @@ html, body {
 }
 
 /* ==========================================================================
-   6. 📱 COMPATIBILIDADE MOBILE EXTREMA (Alinhamentos Fáceis ao Toque)
+   6. POPUP & MODAL (JS)
+   ========================================================================== */
+.popup-found {
+    position: fixed;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    padding: 12px 24px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-align: center;
+    z-index: 2000;
+    transition: bottom 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.popup-found.show {
+    bottom: 30px;
+}
+
+.popup-found span {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.95);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.ativo {
+    display: flex;
+}
+
+.fechar {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   7. MOBILE RESPONSIVO
    ========================================================================== */
 @media (max-width: 1024px) {
     .cards { grid-template-columns: repeat(3, 1fr); }
@@ -296,16 +372,13 @@ html, body {
     .zara-header {
         height: 60px;
         padding: 20px 15px;
-        align-items: flex-start;
     }
     
-    .brand-text {
-        font-size: 19px;
-    }
+    .brand-text { font-size: 19px; }
 
     #produtos-container {
         margin-top: 100px;
-        padding: 0 10px;
+        padding: 0 15px;
     }
 
     .cards {
@@ -313,82 +386,23 @@ html, body {
         gap: 35px 12px;
     }
 
-    .card-img {
-        aspect-ratio: 2 / 3;
-        width: 100%;
-        background-color: #f3f3f3;
-    }
-
-    .card-img img {
-        width: 90%;
-        height: 90%;
-        object-fit: contain;
-    }
-
-    .card-info {
-        padding-top: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-
-    .meta-produto {
-        gap: 2px;
-        max-width: 82%;
-    }
-
-    .card-info h3 {
-        font-size: 9px;
-        letter-spacing: 0.3px;
-    }
-
-    .preco {
-        font-size: 9px;
-    }
-
-    .btn-comprar-zara {
-        color: #000000; /* Preto sólido no mobile para melhorar o contraste no clique */
-        padding: 4px;
-    }
-
-    .plus-icon {
-        width: 14px;
-        height: 14px;
-    }
-
-    /* Transformação da seção de comunidade no mobile */
     #essence-section {
-        margin-top: 120px;
+        margin-top: 100px;
         padding: 60px 15px;
     }
 
-    .essence-header {
-        margin-bottom: 40px;
-    }
-
-    /* Vira um feed vertical único, limpo e super fluído para rolar com o polegar */
     .community-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
 
-    .grid-column.central {
-        margin-top: 0;
-    }
-
-    .grid-column {
-        gap: 20px;
-    }
+    .grid-column.central { margin-top: 0; }
 
     .grid-item.tall, .grid-item.square {
-        aspect-ratio: 4 / 5; /* Formato clássico de feed de Instagram vertical */
+        aspect-ratio: 4 / 5;
     }
 
-    .grid-item img {
-        filter: grayscale(0%); /* Mantém as cores vivas direto no telemóvel */
-    }
+    .grid-item img { filter: grayscale(0%); }
 
-    .zara-footer {
-        padding: 60px 15px 40px 15px;
-    }
+    .zara-footer { padding: 60px 15px 40px 15px; }
 }
